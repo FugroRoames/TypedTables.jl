@@ -175,8 +175,10 @@ function showtable(io::IO, @nospecialize(t), keyname)
         n_spaces = max_column_widths[1] + 3
         print(io, " " ^ n_spaces)
     else
-        print(io, strings[1][1])
-        print(io, "   ")
+        col_str = @inbounds strings[1][1]
+        print(io, col_str)
+        n_spaces = max_column_widths[1] - textwidth(col_str) + 3
+        print(io, " " ^ n_spaces)
     end
     for i ∈ 2:length(strings)
         @inbounds col_str = strings[i][1]
